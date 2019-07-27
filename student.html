@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style type="text/css">
+	#container-div{
+		width: 600px;
+		height: 700px;
+		box-shadow: 1px 1px 2px 6px #eee;
+		margin:auto;
+		padding: 25px
+	}
+</style>
+</head>
+<body>
+<div id="container-div">
+	<div id="div1" class="alert alert-success"></div>
+	<form>
+		<input type="text" name="name" id="name" class="form-control" placeholder="Enter your name">
+		<br>
+		<input type="email" name="email" id="email" class="form-control" placeholder="Enter yout Email">
+		<br>
+		<textarea name="address" id="address" class="form-control" placeholder="Enter yout address"></textarea>
+		<br>
+		<select name="branch" id="branch" class="form-control">
+			<option>Select Branch</option>
+			<option>CSE</option>
+			<option>ISE</option>
+			<option>ECE</option>
+			<option>ME</option>
+		</select>
+		<input type="button" id="btn" name="submit" value="Register" class="btn btn-primary">
+	</form>
+</div>
+
+
+
+<script type="text/javascript">
+	$(function(){
+		$('#div1').hide()
+		$('#btn').click(function(){
+			var name = $('#name').val();
+			var email = $('#email').val();
+			var address = $('#address').val();
+			var branch = $('#branch').val();
+			$.ajax({
+				url:'insertStudent.php',
+				type:'post',
+				data:{
+					name:name,
+					email:email,
+					address:address,
+					branch:branch
+				},
+				success:function(res){
+					$('#div1').show()
+					$('#div1').html(res)
+				},
+				error:function(){
+					alert("failed to insert")
+				}
+			})
+		})
+	})
+</script>
+</body>
+</html>
